@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/auth")
 class AdmUserController {
 
@@ -46,7 +45,7 @@ class AdmUserController {
     @PostMapping("/register")
     fun register(@RequestBody admUserDTO: AdmUserDTO): ResponseEntity<String> {
         return try {
-            val user = admUserService.register(admUserDTO.emailAddress.toString(), admUserDTO.passWord.toString())
+            val user = admUserService.register(admUserDTO)
             ResponseEntity.ok("Registration successful for user: ${user.emailAddress}")
         } catch (e: Exception) {
             ResponseEntity.status(500).body("Error registering user: ${e.message}")
