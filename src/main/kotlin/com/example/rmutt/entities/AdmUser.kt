@@ -14,5 +14,14 @@ data class AdmUser(
     var emailAddress: String? = null,
 
     @Column(name = "password")
-    var passWord: String? = null
+    var passWord: String? = null,
+
+    @Column(name = "first_name")
+    var firstName: String? = null,
+
+    @Column(name = "last_name")
+    var lastName: String? = null,
+
+    @Column(name = "full_name")
+    var fullName: String? = null,
 )

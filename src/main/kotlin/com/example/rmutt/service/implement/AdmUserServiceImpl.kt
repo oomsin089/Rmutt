@@ -1,5 +1,6 @@
 package com.example.rmutt.service.implement
 
+import com.example.rmutt.dto.AdmUserDTO
 import com.example.rmutt.entities.AdmUser
 import com.example.rmutt.repository.AdmUserRepository
 import com.example.rmutt.service.AdmUserService
@@ -22,13 +23,14 @@ class AdmUserServiceImpl: AdmUserService {
        }
     }
 
-    override fun register(emailAddress: String, passWord: String): AdmUser {
+    override fun register(body: AdmUserDTO): AdmUser {
         // เช็คก่อนว่ามี email นี้ในระบบหรือยัง
-        if (admUserRepository.existsByEmailAddress(emailAddress)) {
-            throw RuntimeException("Email address $emailAddress is already registered")
+        if (admUserRepository.existsByEmailAddress(body.emailAddress.toString())) {
+            throw RuntimeException("Email address ${body.emailAddress} is already registered")
         }
 
-        val user = AdmUser(emailAddress = emailAddress, passWord = passWord)
+        val user = AdmUser(emailAddress = body.emailAddress, passWord = body.passWord,
+            firstName = body.firstName, lastName = body.lastName, fullName = body.fullName)
         return admUserRepository.save(user)
     }
 }

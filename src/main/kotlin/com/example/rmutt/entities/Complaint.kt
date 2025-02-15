@@ -11,11 +11,11 @@ data class Complaint(
     @Column(name = "id")
     var id: Int? = null,
 
-    @Column(name = "name")
-    var name: String? = null,
+    @Column(name = "first_name")
+    var firstName: String? = null,
 
-    @Column(name = "surname")
-    var surName: String? = null,
+    @Column(name = "last_name")
+    var lastName: String? = null,
 
     @Column(name = "emailaddress")
     var emailAddress: String? = null,
