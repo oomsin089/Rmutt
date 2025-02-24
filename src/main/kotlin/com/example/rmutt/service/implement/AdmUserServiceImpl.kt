@@ -29,8 +29,13 @@ class AdmUserServiceImpl: AdmUserService {
             throw RuntimeException("Email address ${body.emailAddress} is already registered")
         }
 
-        val user = AdmUser(emailAddress = body.emailAddress, passWord = body.passWord,
-            firstName = body.firstName, lastName = body.lastName, fullName = body.fullName)
+        val user = AdmUser(
+            emailAddress = body.emailAddress,
+            passWord = body.passWord,
+            firstName = body.firstName,
+            lastName = body.lastName,
+            fullName = body.firstName + " " + body.lastName
+        )
         return admUserRepository.save(user)
     }
 }
