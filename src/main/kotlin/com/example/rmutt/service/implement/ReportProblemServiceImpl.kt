@@ -38,4 +38,7 @@ class ReportProblemServiceImpl: ReportProblemService {
             throw e
         }
     }
+    override fun getAll(): List<ReportProblem>{
+        return reportProblemRepository.findAll()
+    }
 }

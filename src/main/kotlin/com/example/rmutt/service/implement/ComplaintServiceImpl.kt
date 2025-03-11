@@ -173,7 +173,8 @@ class ComplaintServiceImpl: ComplaintService {
             // Log complaint state changes
             logComplaintState(
                 updateRequest.state.toString(),
-                complaint.id!!, currentTimestamp,
+                complaint.id!!,
+                currentTimestamp,
                 updateRequest.firstName.toString(),
                 updateRequest.lastName.toString(),
                 updateRequest.fullName.toString(),
@@ -194,7 +195,7 @@ class ComplaintServiceImpl: ComplaintService {
         lastName: String,
         fullName: String,
         emailAddress: String) {
-        if (state in listOf("รอดำเนินการ", "กำลังดำเนินการ", "เสร็จสิ้น")) {
+        if (state in listOf("รอดำเนินการ", "กำลังดำเนินการ", "เสร็จสิ้น","รอตรวจสอบ")) {
             val complaintLog = ComplaintLog(
                 complaintId = complaintId,
                 state = state,
