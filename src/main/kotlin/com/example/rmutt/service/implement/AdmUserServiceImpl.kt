@@ -2,6 +2,7 @@ package com.example.rmutt.service.implement
 
 import com.example.rmutt.dto.AdmUserDTO
 import com.example.rmutt.entities.AdmUser
+import com.example.rmutt.entities.Complaint
 import com.example.rmutt.repository.AdmUserRepository
 import com.example.rmutt.service.AdmUserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -34,8 +35,13 @@ class AdmUserServiceImpl: AdmUserService {
             passWord = body.passWord,
             firstName = body.firstName,
             lastName = body.lastName,
-            fullName = body.firstName + " " + body.lastName
+            fullName = body.firstName + " " + body.lastName,
+            title = body.title,
+            typePersonal = body.typePersonal
         )
         return admUserRepository.save(user)
+    }
+    override fun getAll(): List<AdmUser>{
+        return admUserRepository.findAll()
     }
 }

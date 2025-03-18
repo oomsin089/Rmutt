@@ -1,6 +1,7 @@
 package com.example.rmutt.dto
 
 import java.sql.Timestamp
+import java.time.LocalDate
 
 data class ComplaintDTO(
     var id: Int? = null,
@@ -38,6 +39,8 @@ data class SimplifiedComplaintLogDTO(
     var state  : String? = null,
     var createDate: Timestamp? = null,
     var complaintId : Int? = null,
+    var comment: String? = null,
+    var dueDate: Timestamp? = null,
 )
 
 data class ComplaintActivityDTO(
@@ -53,5 +56,9 @@ data class ComplaintActivityDTO(
     var fullName: String? = null,
     var createDate: Timestamp? = null,
     var state  : String? = null,
+    var comment : String?= null,
     var complaintId : Int? = null,
+    var dueDate : Timestamp? = null,
+    val dueTime: String?, // เพิ่มฟิลด์นี้
+
 )

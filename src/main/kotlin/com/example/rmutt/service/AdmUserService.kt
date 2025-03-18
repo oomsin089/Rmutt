@@ -6,4 +6,5 @@ import com.example.rmutt.entities.AdmUser
 interface AdmUserService {
     fun login(emailAddress: String, passWord: String): AdmUser?
     fun register(body: AdmUserDTO): AdmUser
+    fun getAll(): List<AdmUser>
 }

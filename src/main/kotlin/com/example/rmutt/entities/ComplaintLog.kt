@@ -2,6 +2,7 @@ package com.example.rmutt.entities
 
 import jakarta.persistence.*
 import java.sql.Timestamp
+import java.time.LocalDate
 
 @Entity
 @Table(name = "complaint_system_log")
@@ -31,4 +32,10 @@ data class ComplaintLog(
 
     @Column(name = "full_name")
     var fullName: String? = null,
+
+    @Column(name = "comment")
+    var comment: String? = null,
+
+    @Column(name = "due_date")
+    var dueDate: Timestamp? = null,
 )

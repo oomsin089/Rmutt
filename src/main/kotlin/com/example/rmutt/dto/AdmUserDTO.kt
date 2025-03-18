@@ -6,4 +6,6 @@ data class AdmUserDTO(
     val firstName: String? = null,
     val lastName: String? = null,
     val fullName: String? = null,
+    val title: String? = null,
+    val typePersonal: String? = null,
 )
