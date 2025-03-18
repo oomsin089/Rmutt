@@ -2,6 +2,7 @@ package com.example.rmutt.controller
 
 import com.example.rmutt.dto.AdmUserDTO
 import com.example.rmutt.entities.AdmUser
+import com.example.rmutt.entities.Complaint
 import com.example.rmutt.service.AdmUserService
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Autowired
@@ -50,5 +51,9 @@ class AdmUserController {
         } catch (e: Exception) {
             ResponseEntity.status(500).body("Error registering user: ${e.message}")
         }
+    }
+    @GetMapping("/getAllUser")
+    fun getAllComplaints(): List<AdmUser>{
+        return admUserService.getAll()
     }
 }

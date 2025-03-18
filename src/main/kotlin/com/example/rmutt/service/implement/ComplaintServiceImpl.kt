@@ -16,8 +16,12 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import java.sql.Timestamp
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 
 @Service
 class ComplaintServiceImpl: ComplaintService {
@@ -107,7 +111,8 @@ class ComplaintServiceImpl: ComplaintService {
                         state = activity.state,
                         createDate = activity.createDate,
                         complaintId = activity.complaintId,
-
+                        comment = activity.comment,
+                        dueDate = activity.dueDate
                     )
                 }
 
@@ -167,10 +172,19 @@ class ComplaintServiceImpl: ComplaintService {
             complaint.apply {
                 status = updateRequest.status
             }
+            // Set Bangkok timezone
+            val bangkokZone = ZoneId.of("Asia/Bangkok")
 
             complaintRepository.save(complaint)
-
-            // Log complaint state changes
+            val dueDateTimestamp = updateRequest.dueDate?.let {
+                // If dueDate is already a Timestamp, we need to ensure it's in Bangkok timezone
+                val instant = it.toInstant()
+                // Subtract 7 hours from the timestamp
+                val adjustedInstant = instant.minus(7, ChronoUnit.HOURS)
+                val localDateTime = adjustedInstant.atZone(bangkokZone).toLocalDateTime()
+                Timestamp.valueOf(localDateTime)
+            }
+            // Pass the dueDate directly without toString()
             logComplaintState(
                 updateRequest.state.toString(),
                 complaint.id!!,
@@ -178,7 +192,9 @@ class ComplaintServiceImpl: ComplaintService {
                 updateRequest.firstName.toString(),
                 updateRequest.lastName.toString(),
                 updateRequest.fullName.toString(),
-                updateRequest.emailAddress.toString()
+                updateRequest.emailAddress.toString(),
+                updateRequest.comment.toString(),
+                dueDateTimestamp
             )
 
             return complaint.id.toString()
@@ -194,7 +210,9 @@ class ComplaintServiceImpl: ComplaintService {
         firstName: String,
         lastName: String,
         fullName: String,
-        emailAddress: String) {
+        emailAddress: String,
+        comment:String,
+        dueDate:Timestamp?) {
         if (state in listOf("รอดำเนินการ", "กำลังดำเนินการ", "เสร็จสิ้น","รอตรวจสอบ")) {
             val complaintLog = ComplaintLog(
                 complaintId = complaintId,
@@ -203,7 +221,9 @@ class ComplaintServiceImpl: ComplaintService {
                 fullName = fullName,
                 lastName = lastName,
                 firstName = firstName,
-                emailAddress = emailAddress
+                emailAddress = emailAddress,
+                comment = comment,
+                dueDate = dueDate
             )
             complaintLogRepository.save(complaintLog)
         }
