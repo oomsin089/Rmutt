@@ -6,6 +6,7 @@ import com.example.rmutt.entities.Complaint
 import com.example.rmutt.repository.AdmUserRepository
 import com.example.rmutt.service.AdmUserService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
@@ -15,13 +16,14 @@ class AdmUserServiceImpl: AdmUserService {
     lateinit var admUserRepository: AdmUserRepository
 
     override fun login(emailAddress: String, passWord: String): AdmUser? {
-       try {
+        val user = admUserRepository.findByEmailAddress(emailAddress) ?: return null
 
-           val user = admUserRepository.findByEmailAddress(emailAddress)
-           return if (user.passWord == passWord) user else null
-       }catch (ex:Exception){
-       throw ex
-       }
+        val passwordEncoder = BCryptPasswordEncoder()
+        return if (passwordEncoder.matches(passWord, user.passWord)) {
+            user
+        } else {
+            null
+        }
     }
 
     override fun register(body: AdmUserDTO): AdmUser {
@@ -30,12 +32,15 @@ class AdmUserServiceImpl: AdmUserService {
             throw RuntimeException("Email address ${body.emailAddress} is already registered")
         }
 
+        val passwordEncoder = BCryptPasswordEncoder()
+        val hashedPassword = passwordEncoder.encode(body.passWord) // แฮชรหัสผ่าน
+
         val user = AdmUser(
             emailAddress = body.emailAddress,
-            passWord = body.passWord,
+            passWord = hashedPassword, // ใช้รหัสผ่านที่ถูกแฮช
             firstName = body.firstName,
             lastName = body.lastName,
-            fullName = body.firstName + " " + body.lastName,
+            fullName = "${body.firstName} ${body.lastName}",
             title = body.title,
             typePersonal = body.typePersonal
         )
