@@ -25,9 +25,12 @@ data class AdmUser(
     @Column(name = "full_name")
     var fullName: String? = null,
 
-    @Column(name = "title")
-    var title: String? = null,
+    @Column(name = "gender")
+    var gender: String? = null,
 
     @Column(name = "type_personal")
     var typePersonal: String? = null,
+
+    @Column(name = "rank")
+    var rank: String? = null,
 )
