@@ -41,8 +41,9 @@ class AdmUserServiceImpl: AdmUserService {
             firstName = body.firstName,
             lastName = body.lastName,
             fullName = "${body.firstName} ${body.lastName}",
-            title = body.title,
-            typePersonal = body.typePersonal
+            gender = body.gender,
+            typePersonal = body.typePersonal,
+            rank = body.rank
         )
         return admUserRepository.save(user)
     }

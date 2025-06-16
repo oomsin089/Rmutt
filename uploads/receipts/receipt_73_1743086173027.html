@@ -1,0 +1,77 @@
+    <!DOCTYPE html>
+    <html lang="th">
+    <head>
+        <meta charset="UTF-8">
+        <title>ใบเสร็จรับเงิน</title>
+        <style>
+            body { 
+                font-family: Arial, sans-serif; 
+                max-width: 600px; 
+                margin: 0 auto; 
+                padding: 20px; 
+                line-height: 1.6; 
+            }
+            .receipt-header { 
+                text-align: center; 
+                border-bottom: 2px solid #333; 
+                padding-bottom: 10px; 
+                margin-bottom: 20px; 
+            }
+            .receipt-details { 
+                margin-bottom: 20px; 
+            }
+            .receipt-items { 
+                width: 100%; 
+                border-collapse: collapse; 
+            }
+            .receipt-items th, .receipt-items td { 
+                border: 1px solid #ddd; 
+                padding: 8px; 
+                text-align: left; 
+            }
+            .receipt-total { 
+                text-align: right; 
+                font-weight: bold; 
+                margin-top: 20px; 
+            }
+        </style>
+    </head>
+    <body>
+        <div class="receipt-header">
+            <h1>ใบเสร็จรับเงิน</h1>
+            <p>เลขที่ใบเสร็จ: RCP-73-20250327213613</p>
+            <p>วันที่: 27/03/2025 21:36:12</p>
+        </div>
+        
+        <div class="receipt-details">
+            <p>วิธีการชำระเงิน: เงินสด</p>
+        </div>
+        
+        <table class="receipt-items">
+            <thead>
+                <tr>
+                    <th>รายการ</th>
+                    <th>จำนวน</th>
+                    <th>ราคาต่อหน่วย</th>
+                    <th>รวม</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+    <td>เหล็กกล่องสี่เหลี่ยมจตุรัส</td>
+    <td>2</td>
+    <td>140.00</td>
+    <td>280.00</td>
+</tr>
+            </tbody>
+        </table>
+        
+        <div class="receipt-total">
+            <p>ยอดรวมทั้งหมด: 280.00 บาท</p>
+        </div>
+        
+        <div class="receipt-footer" style="text-align: center; margin-top: 20px; font-size: 0.8em; color: #666;">
+            <p>ขอบคุณที่ใช้บริการ</p>
+        </div>
+    </body>
+    </html>
