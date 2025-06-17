@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${URL:jdbc:postgresql://localhost:5432/postgres}
-    username: ${USER_NAME:postgres}
-    password: ${PASSWORD:oomsin089}
+    url: ${URL:}
+    username: ${USER_NAME:}
+    password: ${PASSWORD:}
   jpa:
     show-sql: true
     properties:
@@ -14,5 +14,3 @@ spring:
     port: 8080
     servlet:
       context-path: /auth
-        spring.mvc.static-path-pattern=/receipts/**
-        spring.web.resources.static-locations=classpath:/static/,classpath:/public/,file:receipts/
