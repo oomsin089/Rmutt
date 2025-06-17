@@ -1,16 +1,25 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${URL:}
-    username: ${USER_NAME:}
-    password: ${PASSWORD:}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:password}
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate:
         show_sql: false
         format_sql: false
-  server:
-    port: 8080
-    servlet:
-      context-path: /auth
+  mvc:
+    static-path-pattern: /receipts/**
+  web:
+    resources:
+      static-locations: classpath:/static/,classpath:/public/,file:receipts/
+
+server:
+  port: ${PORT:8080}
+  servlet:
+    context-path: /auth
